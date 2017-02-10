@@ -19,5 +19,6 @@ from joins.views import home,share
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',home,name='home'),
+     #url(r'^testhome$',testhome,name='testhome'),
     url(r'^(?P<ref_id>.*)$',share,name='share'),
 ]

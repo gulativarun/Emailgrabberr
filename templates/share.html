@@ -1,7 +1,63 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+ {% block jquery %}
+$signUpCount = {{ count }};
+
+function completeBlock(progressBarId){
+	$(progressBarId).css("width","100%").attr("aria-valuenow","100").text("completed");
+};
+function setNewPrec(progressBarId,percentNum,newtext){
+	$(progressBarId).css("width",percentNum + "%").attr("aria-valuenow",percentNum);
+	if (percentNum < 50) {
+		//(progressBarId).text("Almost there");
+		$(progressBarId).text("Keep Going");
+	} else {
+	$(progressBarId).text("WOOH.!!");
+	}
+};
+	
+if ($signUpCount == 0)
+{
+
+}	
+else if($signUpCount > 0 && $signUpCount <5 ) {
+	$newPercent = $signUpCount/5 * 100;
+	setNewPrec("#count5",$newPercent,"Number of friends "+ $signUpCount);
+}
+else if ($signUpCount >=5 && $signUpCount < 15) {
+	completeBlock("#count5");
+	$newCount = $signUpCount - 5;
+	$newPercent = $newCount/(15-5) * 100;
+	setNewPrec("#count15",$newPercent,"Number of friends "+ $signUpCount);
  
+} 
+else if ($signUpCount >= 15 && $signUpCount < 25) {
+	completeBlock("#count5");
+	completeBlock("#count15");
+	$newCount = $signUpCount-15 ;
+	$newPercent= $newCount/(25-15)*100;
+	setNewPrec("#count25",$newPercent,"Number of friends "+ $signUpCount);
+}
+else if($signUpCount >=25 && $signUpCount <50 ) {
+	completeBlock("#count5");
+	completeBlock("#count15");
+	completeBlock("#count25");
+	$newCount = $signUpCount-25;
+	$newPercent = $newCount/(50-25)*100;
+	setNewPrec("#count50",$newPercent,"Number of friends "+ $signUpCount);
+}
+
+else {
+	completeBlock("#count5");
+	completeBlock("#count15");
+	completeBlock("#count25");
+	completeBlock("#count50");
+
+}
+{% endblock %}
+
 {% block content %}
+
 {% include "navbar.html" %}
 <div class="jumbotron" style = "background-color: white";>
 	<div class="container">
@@ -14,27 +70,36 @@
 					<h1>Invite Friends &amp; Earn rewards</h1>
 					<p>Share your unique refferal link below via Facebook, Twitter, Reddit, or LinkedIn to earn more rewards </p>
 					<div class="well" style = 'background-color : #E6E1E1 ;'> {{ ref_url }} </div>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=http://CodingForEntrepreneurs.com/" target="_blank">
 					<i class="fa fa-facebook-square fa-4x" aria-hidden="true" style = 'color : #3b5998'></i>
+					</a>
+					<a href="https://twitter.com/home?status=Hello%20to%20earn%20Exclusive%20redmi%20note%204.%20Share%20your%20refferal%20link%20 {{ref_url }}" target="_blank">
 					<i class="fa fa-twitter-square fa-4x" aria-hidden="true" style = 'color : #4099FF'></i>
+					</a>
+					<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ ref_url }}&title=Hello%20to%20earn%20Exclusive%20redmi%20note%204.%20Share%20your%20refferal%20link%20&summary=Hello%20to%20earn%20Exclusive%20redmi%20note%204.%20Share%20your%20refferal%20link%20&source={{ ref_url }}" target="_blank">
 					<i class="fa fa-linkedIn-square fa-4x" aria-hidden="true" style = 'color : #007bb6'></i>
+					</a>
+					<a href="http://www.reddit.com/submit?url={{ ref_url }}&title=Hello%20to%20earn%20Exclusive%20redmi%20note%204.%20Share%20your%20refferal%20link%20 " target="_blank">
 					<i class="fa fa-reddit-square fa-4x" aria-hidden="true" style = 'color : #900020'></i>
+					</a>
+					<a href='https://plus.google.com/share?url=http://codingforentrepreneurs.com' target="_blank">
 					<i class="fa fa-google-plus-square fa-4x" aria-hidden="true" style = 'color : #D34836'></i>
+					</a>
 			</div>					
 		</div>
 	</div>
 </div>
 <hr/>
-<div class="container">
-{{ ref_id }} <br>
-{{ count }} <br>
+<div class="container" style="text-align:center">
+Joined Number is : {{ count }} <br>
 <div class="well"> {{ ref_url }} </div>
 <div class="row">
 	<div class="col-sm-3">
 		<h3>5 Joined</h3>
 	<div class="progress">
 		
-		  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-			60%
+		  <div class="progress-bar" id ="count5" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			0%
 		  </div>
 		</div>
 		 <h4>Reward earned</h4>
@@ -44,11 +109,11 @@
 		
 <div class="row">
 	<div class="col-sm-3">
-	<h3>25 Joined</h3>
+	<h3>15 Joined</h3>
 	<div class="progress">
 		
-		  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-			60%
+		  <div class="progress-bar" id = "count15" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			0%
 		  </div>
 		</div>
 		 <h4>Reward earned</h4>
@@ -58,10 +123,10 @@
 
 <div class="row">
 	<div class="col-sm-3">
-		<h3>50 Joined</h3>
+		<h3>25 Joined</h3>
 		<div class="progress">
-			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-			60%
+			<div class="progress-bar" id ="count25" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			0%
 		  </div>
 		 
 		</div>
@@ -72,11 +137,11 @@
 
 <div class="row">
 	<div class="col-sm-3">
-		<h3>100 Joined</h3>
+		<h3>50 Joined</h3>
 	<div class="progress">
 		
-		  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-			60%
+		  <div class="progress-bar" id = "count50" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			0%
 		  </div>
 		</div>
 		 <h4>Reward earned</h4>

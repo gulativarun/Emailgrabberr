@@ -1,13 +1,43 @@
 {% extends "base.html"%}
 {% load staticfiles %}
 
+{% block styles %}
+<style>
+
+body {
+
+border-top: 5px solid #DA4343;
+background : url('{% static "img/beach.jpg" %}') no-repeat center center fixed;
+		-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: conver;
+        background-size: cover;
+
+}
+.jumbotron h1 {
+font-weight: 100 !important;
+}
+.jumbotron p {
+font-weight: 100;
+font-size:25px;
+}
+.Featured-row {
+ text-align:center;
+ background-color:white;
+ min-height:200px;
+ padding:40px 0px;
+ border-bottom:1px solid #EEE'
+}
+</style>
+{% endblock %}
+
 {% block content %}
   <div class="jumbotron" style = 'background-color:white;'>
       <div class="container">
 	  <div class="col-sm-6">
         <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <p>Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-default btn-lg btn-block" href="#signup" role="button">Learn more &raquo;</a></p>
 		</div>
 		<div class = "col-sm-6">
 		
@@ -15,13 +45,102 @@
 		</div>
 	 </div>
     </div>
-	<hr/>
-	<div class="container" style=" text-align : center ">
-<h1 padding:20px>Hello,Welcome </h1>
-<form method = 'POST' action='' ><font color="Black"> {% csrf_token %} 
-{{ form.as_p }}
-<input type="Submit" value='Join' class = 'btn' />
-</font>
+	<div class="container" style=" text-align : center;" id="signup">
+
+	<div class="col-sm-6 col-sm-offset-3">
+	<i class="fa fa-unlock-alt fa-5x" aria-hidden="true"></i>
+	<h1 padding:20px color:#DA4343>Unlock this </h1>
+		<form class = "form-horizontal" method = 'POST' action='' ><font color="Black"> {% csrf_token %} 
+		<div class="form-group form-group-lg">
+		{% if form.email.errors%}
+		{% for err in form.email.errors %}
+		<div class="alert alert-danger" role="alert"> Email is required
+		</div>
+		{% endfor %}
+		{% endif %}
+		<div class="input-group">
+		<input class="form-control" type="email" name="email" type="email" placeholder="Your email.."/>
+		<span class="input-group-btn">
+		<input type="Submit" value='Join' class = 'btn btn-primary btn-lg' />
+		</span>
+		</div>
+		</div>
 </form>
+<p class="lead"> Hello signup here..</br> for some exciting prizes.</p>
+</div>
+
+</font>
+
+</div>
+
+<div class='row Featured-row'>
+<div class="col-sm-12">
+</hr>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+
+</div>
+
+</div>
+<div class='row Featured-row'>
+<div class="col-sm-12">
+
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+<div class="col-sm-3">
+<i class="fa fa-download fa-3x" aria-hidden="true"></i>
+<h1>Hello</h1>
+<p class="lead">
+hello something again
+</p>
+</div>
+
+</div>
+
 </div>
 {% endblock %}
