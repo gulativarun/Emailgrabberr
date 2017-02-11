@@ -1,1 +1,1 @@
-web : gunicorn emailgrabberr.wsgi
+web: gunicorn emailgrabberr.wsgi --log-file -
